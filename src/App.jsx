@@ -1,7 +1,9 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import styled from '@emotion/styled'
 import CryptoImage from './img/imagen-criptos.png'
 import Form from './components/Form'
+import Results from './components/Results'
+import Spinner from './components/Spinner'
 
 const Container = styled.div`
   max-width: 900px;
@@ -42,12 +44,41 @@ const Heading = styled.h1`
 
 function App() {
 
+  const [currencies, setCurrencies] = useState({});
+  const [result, setResult] = useState({});
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    if (Object.keys(currencies).length > 0) {
+      const quoteCrypto = async () => {
+        setLoading(true);
+        setResult({});
+
+        const { currency, cryptoCurrency } = currencies;
+
+        const url = `https://min-api.cryptocompare.com/data/pricemultifull?fsyms=${cryptoCurrency}&tsyms=${currency}`;
+        const response = await fetch(url);
+        const result = await response.json();
+
+        setResult(result.DISPLAY[cryptoCurrency][currency]);
+        setLoading(false);
+      }
+
+      quoteCrypto();
+
+    }
+  }, [currencies]);
+
   return (
     <Container>
       <Image src={CryptoImage} alt='cryptocurrency image'></Image>
       <div>
         <Heading>Instant cryptocurrency trading</Heading>
-        <Form></Form>
+        <Form
+          setCurrencies={setCurrencies}
+        ></Form>
+        {loading && <Spinner></Spinner>}
+        {result.PRICE && <Results result={result}></Results>}
       </div>
     </Container>
   )

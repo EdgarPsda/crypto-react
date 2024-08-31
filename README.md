@@ -47,6 +47,16 @@ Follow these steps to run the project locally:
 
    The application should now be running on `http://localhost:5173`.
 
+## Docker Usage
+
+You can also use the pre-built Docker image for easy deployment. To run the application using Docker, execute the following command:
+
+```
+docker run -it --rm -p 80:80 --memory="128m" --cpus="0.5" edgarpsda/crypto-react
+```
+
+This will expose the application on port 80.
+
 ## Usage
 
 After launching the application, users can:

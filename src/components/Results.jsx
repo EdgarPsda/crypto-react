@@ -28,8 +28,10 @@ const Price = styled.p`
     }
 `
 
+// eslint-disable-next-line react/prop-types
 const Results = ({ result }) => {
 
+    // eslint-disable-next-line react/prop-types
     const { PRICE, HIGHDAY, LOWDAY, CHANGEPCT24HOUR, IMAGEURL, LASTUPDATE } = result;
 
     return (

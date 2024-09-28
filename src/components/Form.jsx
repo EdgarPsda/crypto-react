@@ -23,6 +23,7 @@ const InputSubmit = styled.input`
     }
 `
 
+// eslint-disable-next-line react/prop-types
 const Form = ({ setCurrencies }) => {
 
     const [cryptos, setCryptos] = useState([]);

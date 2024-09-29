@@ -1,0 +1,32 @@
+name: Run Tests
+
+on:
+  push:
+    branches: [test/add-form-component-tests]
+  pull_request:
+    branches: [master]
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [20.x]
+    steps:
+      # Clone repository
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # Configure nodeJs version
+      - name: Configure Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      # Install dependencies
+      - name: Install dependencies
+        run: npm install
+
+      # Execute tests
+      - name: Run tests
+        run: npm run test

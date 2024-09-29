@@ -9,5 +9,6 @@ export default defineConfig({
       usePolling: true,
     },
   },
-  base: "https://edgarpsda.github.io/crypto-react",
+  //base: "https://edgarpsda.github.io/crypto-react",
+  base: "/"
 });

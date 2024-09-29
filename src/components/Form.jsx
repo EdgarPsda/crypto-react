@@ -75,7 +75,7 @@ const Form = ({ setCurrencies }) => {
     return (
         <>
             {error && <Error>All fields are required.</Error>}
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} data-testid="Select Currency">
                 <SelectCurrency></SelectCurrency>
                 <SelectCryptoCurrency></SelectCryptoCurrency>
                 <InputSubmit type="submit" value="Quote" />

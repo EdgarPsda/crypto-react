@@ -11,6 +11,7 @@ const Text = styled.div`
     text-align: center;
 `
 
+// eslint-disable-next-line react/prop-types
 const Error = ({ children }) => {
     return (
         <Text>{children}</Text>

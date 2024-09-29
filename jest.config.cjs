@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 config = {
     collectCoverage: false,
     collectCoverageFrom: ["src/**/*.{js,jsx}"],

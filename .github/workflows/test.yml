@@ -11,21 +11,38 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [20.x]
+        os: [ubuntu-latest]
+        node: [20.x]
     steps:
       # Clone repository
       - name: Checkout repository
         uses: actions/checkout@v3
 
       # Configure nodeJs version
-      - name: Configure Node.js
+      - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: ${{ matrix.node-version }}
+          node-version: ${{ matrix.node }}
+
+      # Cache dependencies
+      - name: Cache dependencies
+        uses: actions/cache@v3
+        id: cache
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node-${{ matrix.node }}-${{ hashFiles('package-lock.json') }}
+          restore-keys: |
+            $GITHUB_SHA-npm-${{ matrix.node }}
+            $GITHUB_SHA-npm-
 
       # Install dependencies
       - name: Install dependencies
+        if: steps.cache.outputs.cache-hit != 'true'
         run: npm install
+
+      # Linting
+      - name: Run linting
+        run: npm run lint
 
       # Execute tests
       - name: Run tests

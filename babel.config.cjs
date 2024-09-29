@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 config = {
     presets: ["@babel/preset-env", ['@babel/preset-react', { "runtime": "automatic" }]],
     targets: {

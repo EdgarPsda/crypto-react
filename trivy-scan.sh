@@ -3,8 +3,11 @@
 dockerImageName=$(awk 'NR==1 {print $3}' Dockerfile)
 echo $dockerImageName
 
-docker run --rm -v $WORKSPACE:/root/.cache/ aquasec/trivy:0.17.2 -q image --exit-code 0 --severity HIGH --light $dockerImageName
-docker run --rm -v $WORKSPACE:/root/.cache/ aquasec/trivy:0.17.2 -q image --exit-code 1 --severity CRITICAL --light $dockerImageName
+# Use current directory for caching Trivy data
+docker run --rm -v "$(pwd)/.trivy-cache:/root/.cache/" \
+  aquasec/trivy:0.17.2 -q image --exit-code 0 --severity HIGH --light $dockerImageName
+docker run --rm -v "$(pwd)/.trivy-cache:/root/.cache/" \
+  aquasec/trivy:0.17.2 -q image --exit-code 1 --severity CRITICAL --light $dockerImageName
 
     # Trivy scan result processing
     exit_code=$?

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-dockerImageName=$(awk 'NR==1 {print $3}' Dockerfile)
+dockerImageName=$(awk 'NR==2 {print $2}' Dockerfile)
 echo $dockerImageName
 
 # Use current directory for caching Trivy data

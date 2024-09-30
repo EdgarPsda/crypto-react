@@ -45,7 +45,7 @@ jobs:
 
       # Execute trivy script
       - name: Run trivy Scan
-        run: ./trivy-scan.sh
+        run: chmod +x ./trivy-scan.sh; ./trivy-scan.sh
 
       # Push docker image to docker hub
       - name: Push Docker image

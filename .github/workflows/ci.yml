@@ -43,6 +43,14 @@ jobs:
       - name: Build Docker image
         run: docker build -t ${{ secrets.DOCKER_USERNAME }}/crypto-react:${{ github.sha }} .
 
+      # Give execution permissions
+      - name: Give execute permissions to Trivy script
+        run: chmod +x ./trivy-scan.sh
+
+      # Execute trivy script
+      - name: Run trivy Scan
+        run: ./trivy-scan.sh
+
       # Push docker image to docker hub
       - name: Push Docker image
         run: docker push ${{ secrets.DOCKER_USERNAME }}/crypto-react:${{ github.sha }}

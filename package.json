@@ -16,7 +16,7 @@
     "@babel/core": "^7.25.2",
     "@babel/preset-env": "^7.25.4",
     "@emotion/react": "^11.11.3",
-    "@emotion/styled": "^11.11.0",
+    "@emotion/styled": "^11.13.0",
     "babel-jest": "^29.7.0",
     "jest-fetch-mock": "^3.0.3",
     "react": "^18.2.0",
